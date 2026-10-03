@@ -1,0 +1,14 @@
+{
+  "model": "yolo12n",
+  "task": "det",
+  "seed": 42,
+  "epochs_completed": 100,
+  "results": {
+    "metrics/precision(B)": 0.577814154588846,
+    "metrics/recall(B)": 0.40039447731755423,
+    "metrics/mAP50(B)": 0.4109190329957254,
+    "metrics/mAP50-95(B)": 0.19780024773673824,
+    "fitness": 0.19780024773673824
+  },
+  "best_model": "/content/drive/MyDrive/DC2PSA_YOLO26_Seg/runs/det/yolo12n_seed42/weights/best.pt"
+}
