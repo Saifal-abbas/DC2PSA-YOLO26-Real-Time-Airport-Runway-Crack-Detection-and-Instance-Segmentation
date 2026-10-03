@@ -11,13 +11,11 @@ CrackAirport A Dataset for Segmentation of Cracks/
 DC2PSA/CrackAirport A Dataset for Segmentation of Cracks/
 
 # ======================== MODEL WEIGHTS & CHECKPOINTS ========================
-*.pt
 *.pth
 *.onnx
 *.engine
 *.tflite
 *_ncnn_model/
-runs/
 
 # ======================== PYTHON ========================
 __pycache__/
@@ -61,6 +59,8 @@ Research proposal.docx
 Research proposal.pdf
 
 # Root working drafts & development folders (clean versions organized in repo)
+runs-20260910T055654Z-1-001/
+runs-*.zip
 CrackAirport_Dataset_Details.md
 DC2PSA_YOLO26_Seg_Complete_Results.md
 Research_Proposal.md
@@ -74,4 +74,5 @@ NewPaper/
 !figures/**/*.png
 !figures/**/*.jpg
 !notebooks/DC2PSA_YOLO26_Seg_Training.ipynb
+!runs/**
 
