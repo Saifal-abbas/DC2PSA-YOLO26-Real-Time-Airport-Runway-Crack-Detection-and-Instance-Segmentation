@@ -1,0 +1,18 @@
+{
+  "model": "yolov8n",
+  "task": "seg",
+  "seed": 42,
+  "epochs_completed": 100,
+  "results": {
+    "metrics/precision(B)": 0.5490648271010028,
+    "metrics/recall(B)": 0.4181459566074951,
+    "metrics/mAP50(B)": 0.41402664102695647,
+    "metrics/mAP50-95(B)": 0.22536387391551024,
+    "metrics/precision(M)": 0.5147638522764941,
+    "metrics/recall(M)": 0.27416173570019725,
+    "metrics/mAP50(M)": 0.25565697091238515,
+    "metrics/mAP50-95(M)": 0.054594339593739535,
+    "fitness": 0.27995821350924976
+  },
+  "best_model": "/content/drive/MyDrive/DC2PSA_YOLO26_Seg/runs/seg/yolov8n_seed42/weights/best.pt"
+}
