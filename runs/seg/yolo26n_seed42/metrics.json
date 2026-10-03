@@ -1,0 +1,18 @@
+{
+  "model": "yolo26n",
+  "task": "seg",
+  "seed": 42,
+  "epochs_completed": 100,
+  "results": {
+    "metrics/precision(B)": 0.5002833613557848,
+    "metrics/recall(B)": 0.35502958579881655,
+    "metrics/mAP50(B)": 0.33245010306472345,
+    "metrics/mAP50-95(B)": 0.1794756650944193,
+    "metrics/precision(M)": 0.38080716685975186,
+    "metrics/recall(M)": 0.26444072277405617,
+    "metrics/mAP50(M)": 0.21265349096629726,
+    "metrics/mAP50-95(M)": 0.04185958426701331,
+    "fitness": 0.22133524936143262
+  },
+  "best_model": "/content/drive/MyDrive/DC2PSA_YOLO26_Seg/runs/seg/yolo26n_seed42/weights/best.pt"
+}
