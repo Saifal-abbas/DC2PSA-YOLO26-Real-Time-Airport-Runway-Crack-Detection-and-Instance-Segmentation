@@ -457,10 +457,10 @@ Run inference with automatic ASTM D5340 crack severity classification:
 
 ```bash
 # Single image inference
-python predict.py --weights best.pt --source demo/sample_runway_1.jpg --conf 0.25
+python predict.py --weights runs/seg/dc2psa-yolo26s_seed42/weights/best.pt --source path/to/runway_image.jpg --conf 0.25
 
 # Batch inference on drone imagery directory
-python predict.py --weights best.pt --source demo/ --conf 0.25 --save-dir runs/predict
+python predict.py --weights runs/seg/dc2psa-yolo26s_seed42/weights/best.pt --source path/to/images/ --conf 0.25 --save-dir runs/predict
 
 # Dedicated FAA PCI & ASTM D5340 geometric quantification tool
 python quantify_pci.py --masks-dir runs/predict/masks --gsd 1.5 --output-csv results/pci_report.csv
@@ -471,10 +471,10 @@ python quantify_pci.py --masks-dir runs/predict/masks --gsd 1.5 --output-csv res
 from models.dc2psa import build_dc2psa_model
 
 # Load model with DC2PSA attention module
-model = build_dc2psa_model("yolo26s-seg.pt", task="segment")
+model = build_dc2psa_model("runs/seg/dc2psa-yolo26s_seed42/weights/best.pt", task="segment")
 
 # Run inference
-results = model.predict("demo/sample_runway_1.jpg", imgsz=640, conf=0.25)
+results = model.predict("path/to/runway_image.jpg", imgsz=640, conf=0.25)
 for r in results:
     print(f"Detected {len(r.boxes)} cracks with {len(r.masks.data)} segmentation masks")
 ```
@@ -491,7 +491,6 @@ DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 ├── CITATION.cff                       # Citation File Format for academic software
 ├── requirements.txt                   # Extended Python dependencies
 ├── config.json                        # Training & evaluation configuration
-├── .gitignore                         # Comprehensive Git ignore rules
 │
 ├── models/                            # PyTorch Architecture Implementations
 │   ├── __init__.py                    # Module export interface
@@ -506,10 +505,6 @@ DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 │   ├── crackairport_det.yaml          # Detection dataset YAML
 │   ├── crackairport_seg.yaml          # Segmentation dataset YAML
 │   └── prepare_dataset.py             # Dataset verification & split balance validator
-│
-├── demo/                              # Sample runway drone images for instant inference
-│   ├── sample_runway_1.jpg
-│   └── sample_runway_2.jpg
 │
 ├── notebooks/                         # Complete reproducibility notebooks
 │   └── DC2PSA_YOLO26_Seg_Training.ipynb   # 16-experiment training & evaluation pipeline
@@ -557,13 +552,15 @@ DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 │   │   └── all_metrics_v1.csv         # Complete epoch-by-epoch evaluation metrics
 │   └── training_summary_v1.csv        # Best epoch summary across all 16 runs
 │
-├── docs/                              # Extended documentation
-│   ├── RESULTS.md                     # Deep-dive results analysis & reviewer guide
-│   └── DEPLOYMENT.md                  # Comprehensive edge & cloud deployment guide
+├── runs/                              # Full 16-model training runs & checkpoints
+│   ├── det/                           # 9 detection experiments (weights, curves, logs)
+│   └── seg/                           # 7 segmentation experiments (weights, curves, logs)
 │
-└── .github/                           # GitHub Configuration
-    └── workflows/
-        └── ci.yml                     # Automated PyTorch CI test suite
+└── docs/                              # Extended documentation
+    ├── RESULTS.md                     # Deep-dive results analysis & reviewer guide
+    ├── DEPLOYMENT.md                  # Comprehensive edge & cloud deployment guide
+    ├── DATASET.md                     # 412-line specification of the CrackAirport drone benchmark
+    └── PROPOSAL.md                    # Complete research proposal with mathematical formulation
 ```
 
 ---
