@@ -18,8 +18,8 @@ authors:
 version: 1.0.0
 doi: 10.3390/s26165113
 date-released: 2026-10-01
-url: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg"
-repository-code: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg"
+url: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation"
+repository-code: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation"
 keywords:
   - "airport runway inspection"
   - "crack detection"

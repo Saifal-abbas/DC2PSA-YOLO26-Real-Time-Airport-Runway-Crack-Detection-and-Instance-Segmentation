@@ -379,8 +379,8 @@ All **16 experiments** (9 detection + 7 segmentation) were conducted under ident
 
 ```bash
 # Clone the repository
-git clone https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg.git
-cd DC2PSA-YOLO26-Seg
+git clone https://github.com/Saifal-abbas/DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation.git
+cd DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 
 # Create virtual environment
 python -m venv venv
@@ -484,7 +484,7 @@ for r in results:
 ## 📁 Repository Structure
 
 ```
-DC2PSA-YOLO26-Seg/
+DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation/
 │
 ├── README.md                          # Comprehensive project documentation
 ├── LICENSE                            # MIT License

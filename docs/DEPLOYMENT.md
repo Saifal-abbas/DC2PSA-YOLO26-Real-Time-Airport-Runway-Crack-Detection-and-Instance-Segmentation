@@ -29,8 +29,8 @@ Step-by-step instructions for reproducing the experiments, running inference, an
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg.git
-cd DC2PSA-YOLO26-Seg
+git clone https://github.com/Saifal-abbas/DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation.git
+cd DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 
 # 2. Create a virtual environment
 python -m venv venv
