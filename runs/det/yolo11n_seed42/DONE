@@ -1,0 +1,7 @@
+{
+  "model": "yolo11n",
+  "task": "det",
+  "seed": 42,
+  "epochs": 100,
+  "completed_at": "2026-09-05T12:46:58"
+}
