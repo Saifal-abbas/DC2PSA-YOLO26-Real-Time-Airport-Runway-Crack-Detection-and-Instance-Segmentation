@@ -60,15 +60,17 @@ DC2PSA_YOLO26_Seg_Complete_Results.docx
 Research proposal.docx
 Research proposal.pdf
 
-# Drive download archives
-drive-download-*.zip
-runs-*.zip
-
-# Export bundles
-DC2PSA/exports/DC2PSA_YOLO26_Seg_bundle_v1.zip
+# Root working drafts & development folders (clean versions organized in repo)
+CrackAirport_Dataset_Details.md
+DC2PSA_YOLO26_Seg_Complete_Results.md
+Research_Proposal.md
+*.ipynb
+DC2PSA/
+NewPaper/
 
 # ======================== KEEP THESE (override) ========================
 !requirements.txt
 !docs/**
 !figures/**/*.png
-!notebooks/*.ipynb
+!notebooks/DC2PSA_YOLO26_Seg_Training.ipynb
+

@@ -421,38 +421,62 @@ names: ['Crack']
 
 ### Training
 
-Open the training notebook on Google Colab or run locally:
+You can train using either the standalone CLI or the interactive Google Colab notebook:
 
+#### 1. CLI Training (Detection & Segmentation)
 ```bash
-# Option 1: Google Colab (recommended)
-# Upload notebooks/DC2PSA_YOLO26_Seg_Training.ipynb to Colab
+# Train Detection Model (100 epochs, seed 42)
+python train.py --task det --data data/crackairport_det.yaml --epochs 100 --batch 16 --imgsz 640
 
-# Option 2: Local training (requires GPU)
+# Train Instance Segmentation Model (100 epochs, seed 42)
+python train.py --task seg --data data/crackairport_seg.yaml --epochs 100 --batch 16 --imgsz 640
+```
+
+#### 2. Interactive Notebook (Google Colab / Jupyter)
+```bash
 jupyter notebook notebooks/DC2PSA_YOLO26_Seg_Training.ipynb
 ```
 
-### Quick Inference
+---
 
+### Evaluation & Benchmarking
+
+```bash
+# Evaluate Detection on Test Set
+python val.py --weights runs/det/dc2psa-yolo26s_det_seed42/weights/best.pt --data data/crackairport_det.yaml --split test
+
+# Evaluate Segmentation on Test Set
+python val.py --weights runs/seg/dc2psa-yolo26s_seg_seed42/weights/best.pt --data data/crackairport_seg.yaml --split test
+```
+
+---
+
+### Inference & Automated FAA PCI Crack Quantification
+
+Run inference with automatic ASTM D5340 crack severity classification:
+
+```bash
+# Single image inference
+python predict.py --weights best.pt --source demo/sample_runway_1.jpg --conf 0.25
+
+# Batch inference on drone imagery directory
+python predict.py --weights best.pt --source demo/ --conf 0.25 --save-dir runs/predict
+
+# Dedicated FAA PCI & ASTM D5340 geometric quantification tool
+python quantify_pci.py --masks-dir runs/predict/masks --gsd 1.5 --output-csv results/pci_report.csv
+```
+
+#### Python API Integration
 ```python
-from ultralytics import YOLO
+from models.dc2psa import build_dc2psa_model
 
-# Load trained model
-model = YOLO("best.pt")
+# Load model with DC2PSA attention module
+model = build_dc2psa_model("yolo26s-seg.pt", task="segment")
 
 # Run inference
-results = model.predict(
-    source="path/to/runway/image.jpg",
-    imgsz=640,
-    conf=0.35,
-    save=True,
-    save_txt=True
-)
-
-# Access instance masks for PCI quantification
-for result in results:
-    masks = result.masks        # Instance segmentation masks
-    boxes = result.boxes        # Bounding boxes
-    print(f"Detected {len(boxes)} cracks")
+results = model.predict("demo/sample_runway_1.jpg", imgsz=640, conf=0.25)
+for r in results:
+    print(f"Detected {len(r.boxes)} cracks with {len(r.masks.data)} segmentation masks")
 ```
 
 ---
@@ -462,61 +486,84 @@ for result in results:
 ```
 DC2PSA-YOLO26-Seg/
 │
-├── README.md                          # This file
+├── README.md                          # Comprehensive project documentation
 ├── LICENSE                            # MIT License
-├── requirements.txt                   # Python dependencies
-├── config.json                        # Training configuration
-├── .gitignore                         # Git ignore rules
+├── CITATION.cff                       # Citation File Format for academic software
+├── requirements.txt                   # Extended Python dependencies
+├── config.json                        # Training & evaluation configuration
+├── .gitignore                         # Comprehensive Git ignore rules
 │
-├── notebooks/                         # Jupyter notebooks
-│   └── DC2PSA_YOLO26_Seg_Training.ipynb   # Complete training & evaluation pipeline
+├── models/                            # PyTorch Architecture Implementations
+│   ├── __init__.py                    # Module export interface
+│   └── dc2psa.py                      # DSConv & DC2PSA attention module definitions
+│
+├── train.py                           # Standalone CLI training script
+├── val.py                             # Standalone evaluation & benchmark CLI
+├── predict.py                         # Inference CLI with ASTM D5340 crack quantification
+├── quantify_pci.py                    # Dedicated FAA PCI & ASTM D5340 severity analysis CLI
+│
+├── data/                              # Dataset configurations & verification
+│   ├── crackairport_det.yaml          # Detection dataset YAML
+│   ├── crackairport_seg.yaml          # Segmentation dataset YAML
+│   └── prepare_dataset.py             # Dataset verification & split balance validator
+│
+├── demo/                              # Sample runway drone images for instant inference
+│   ├── sample_runway_1.jpg
+│   └── sample_runway_2.jpg
+│
+├── notebooks/                         # Complete reproducibility notebooks
+│   └── DC2PSA_YOLO26_Seg_Training.ipynb   # 16-experiment training & evaluation pipeline
 │
 ├── figures/                           # Publication-quality figures (600 DPI)
 │   ├── architecture/                  # Model architecture diagrams
 │   │   ├── dc2psa_pipeline.png        # End-to-end architecture
-│   │   ├── dc2psa_module_internals.png # DC2PSA module detail
-│   │   └── faa_pci_quantification.png # FAA PCI pipeline
-│   ├── dataset/                       # Dataset visualization
-│   │   ├── runway_overview.png        # Runway drone image
-│   │   ├── sample_images.png          # Sample images with GT masks
-│   │   ├── instance_geometry.png      # Crack geometry analysis
-│   │   ├── split_balance.png          # Train/Val/Test balance
-│   │   ├── spatial_density.png        # Crack spatial heatmap
-│   │   ├── annotation_stats.png       # Annotation statistics
-│   │   ├── pos_neg_gallery.png        # Positive vs negative samples
-│   │   └── mask_overlays.png          # GT mask overlays
-│   ├── results/                       # Quantitative result figures
-│   │   ├── benchmark_bar.png          # mAP@0.5 bar chart
-│   │   ├── pr_curves.png             # Precision-Recall curves
-│   │   ├── f1_confidence.png         # F1-Confidence curves
-│   │   ├── confusion_matrices.png    # Normalized confusion matrices
-│   │   ├── convergence_curves.png    # Training convergence
-│   │   ├── radar_chart.png           # Multi-metric radar chart
-│   │   ├── performance_heatmap.png   # Full performance heatmap
-│   │   ├── det_vs_seg.png            # Det vs Seg correlation
-│   │   ├── metric_comparison.png     # Per-metric comparison
-│   │   └── convergence_analysis.png  # Convergence analysis
-│   └── qualitative/                   # Qualitative predictions
-│       └── prediction_comparison.png  # Visual prediction comparison
+│   │   ├── dc2psa_module_internals.png # DSConv vs DCNv2 vs Conv comparison
+│   │   └── faa_pci_quantification.png # FAA PCI quantification flowchart
+│   ├── dataset/                       # Dataset distribution & visualization
+│   │   ├── runway_overview.png        # Runway drone orthomosaic overview
+│   │   ├── sample_images.png          # Sample runway crops with GT masks
+│   │   ├── instance_geometry.png      # Crack geometry & aspect ratio analysis
+│   │   ├── split_balance.png          # Train/Val/Test class & instance balance
+│   │   ├── spatial_density.png        # Spatial distribution density heatmap
+│   │   ├── annotation_stats.png       # Annotation statistics & polygon counts
+│   │   ├── pos_neg_gallery.png        # Positive vs negative background samples
+│   │   └── mask_overlays.png          # Ground truth segmentation mask overlays
+│   ├── results/                       # Benchmark & ablation visualizations
+│   │   ├── benchmark_bar.png          # 9-model mAP@0.5 comparative bar chart
+│   │   ├── pr_curves.png              # Precision-Recall curves across architectures
+│   │   ├── f1_confidence.png          # F1-Confidence trade-off curves
+│   │   ├── confusion_matrices.png     # Normalized confusion matrices
+│   │   ├── convergence_curves.png     # 100-epoch training & validation convergence
+│   │   ├── radar_chart.png            # Multi-metric trade-off radar chart
+│   │   ├── performance_heatmap.png    # Comprehensive performance metric heatmap
+│   │   ├── det_vs_seg.png             # Detection vs Segmentation correlation
+│   │   ├── metric_comparison.png      # Box vs Mask mAP comparative analysis
+│   │   └── convergence_analysis.png   # Gradient & loss stability analysis
+│   └── qualitative/                   # Visual qualitative comparisons
+│       └── prediction_comparison.png  # Side-by-side crack segmentation predictions
 │
 ├── results/                           # Quantitative data (CSV)
-│   ├── tables/                        # Result tables
-│   │   ├── T01_dataset_v1.csv         # Dataset statistics
-│   │   ├── T02_complexity_v1.csv      # Model complexity
-│   │   ├── T03_hyperparams_v1.csv     # Hyperparameters
-│   │   ├── T04_detection_v1.csv       # Detection benchmark
-│   │   ├── T05_segmentation_v1.csv    # Segmentation benchmark
-│   │   ├── T06_dual_task_v1.csv       # Dual-task analysis
-│   │   ├── T08_efficiency_v1.csv      # Model efficiency
-│   │   ├── T09_losses_v1.csv          # Training losses
-│   │   └── T_cross_domain_v1.csv      # Cross-domain comparison
+│   ├── tables/                        # Publication Tables (T01 - T09, T_cross_domain)
+│   │   ├── T01_dataset_v1.csv         # Dataset split and geometry statistics
+│   │   ├── T02_complexity_v1.csv      # Parameter counts, GFLOPs, latency
+│   │   ├── T03_hyperparams_v1.csv     # Hyperparameter grid specification
+│   │   ├── T04_detection_v1.csv       # Detection benchmark results (9 models)
+│   │   ├── T05_segmentation_v1.csv    # Segmentation benchmark results (7 models)
+│   │   ├── T06_dual_task_v1.csv       # Dual-task joint performance analysis
+│   │   ├── T08_efficiency_v1.csv      # Efficiency metrics and throughput
+│   │   ├── T09_losses_v1.csv          # Training & validation loss progressions
+│   │   └── T_cross_domain_v1.csv      # Road (RDD2022) vs Airport domain gap analysis
 │   ├── metrics/
-│   │   └── all_metrics_v1.csv         # Complete metrics (all experiments)
-│   └── training_summary_v1.csv        # Best epoch summary
+│   │   └── all_metrics_v1.csv         # Complete epoch-by-epoch evaluation metrics
+│   └── training_summary_v1.csv        # Best epoch summary across all 16 runs
 │
-└── docs/                              # Extended documentation
-    ├── RESULTS.md                     # Complete results with analysis
-    └── DEPLOYMENT.md                  # Deployment guide
+├── docs/                              # Extended documentation
+│   ├── RESULTS.md                     # Deep-dive results analysis & reviewer guide
+│   └── DEPLOYMENT.md                  # Comprehensive edge & cloud deployment guide
+│
+└── .github/                           # GitHub Configuration
+    └── workflows/
+        └── ci.yml                     # Automated PyTorch CI test suite
 ```
 
 ---

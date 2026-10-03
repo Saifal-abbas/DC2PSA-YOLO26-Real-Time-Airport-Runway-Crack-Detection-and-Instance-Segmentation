@@ -1,0 +1,51 @@
+cff-version: 1.2.0
+message: "If you use DC2PSA-YOLO26-Seg or the CrackAirport benchmark in your research, please cite our Sensors 2026 paper and repository."
+title: "DC2PSA-YOLO26-Seg: Deformable Parallel Spatial Attention-Enhanced YOLO26 for Real-Time Airport Runway Crack Detection and Instance Segmentation"
+authors:
+  - family-names: "Abbas"
+    given-names: "Saifal"
+    orcid: "https://orcid.org/0009-0002-3928-8588"
+    affiliation: "School of Highway, Chang'an University, Xi'an 710064, China"
+  - family-names: "Shawon"
+    given-names: "Md Taherul Islam"
+    affiliation: "School of Highway, Chang'an University, Xi'an 710064, China"
+  - family-names: "Qamar"
+    given-names: "Saqib"
+    affiliation: "Department of Civil and Architectural Engineering, KTH Royal Institute of Technology, Stockholm, Sweden; Faculty of Computing and Information Technology, Sohar University, Sohar 311, Oman"
+  - family-names: "Adeel"
+    given-names: "Muhammad"
+    affiliation: "School of Transportation and Logistics Engineering, Wuhan University of Technology, Wuhan 430063, China"
+version: 1.0.0
+doi: 10.3390/s26165113
+date-released: 2026-10-01
+url: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg"
+repository-code: "https://github.com/Saifal-abbas/DC2PSA-YOLO26-Seg"
+keywords:
+  - "airport runway inspection"
+  - "crack detection"
+  - "instance segmentation"
+  - "YOLO26"
+  - "DC2PSA attention"
+  - "dynamic snake convolution"
+  - "FAA PCI"
+  - "ASTM D5340"
+  - "drone remote sensing"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: "Abbas"
+      given-names: "Saifal"
+    - family-names: "Shawon"
+      given-names: "Md Taherul Islam"
+    - family-names: "Qamar"
+      given-names: "Saqib"
+    - family-names: "Adeel"
+      given-names: "Muhammad"
+  journal: "Sensors"
+  title: "DC2PSA-YOLO26-Seg: Deformable Parallel Spatial Attention-Enhanced YOLO26 for Real-Time Airport Runway Crack Detection and Instance Segmentation"
+  volume: 26
+  issue: 16
+  pages: 5113
+  year: 2026
+  doi: 10.3390/s26165113
+  url: "https://doi.org/10.3390/s26165113"

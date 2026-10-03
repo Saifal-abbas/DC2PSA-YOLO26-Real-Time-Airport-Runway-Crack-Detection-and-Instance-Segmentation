@@ -1,0 +1,15 @@
+# CrackAirport Runway Crack Instance Segmentation Dataset Configuration
+# Baseline Paper: Abbas et al., Sensors 2026, 26, 5113
+
+# Dataset root directory (set this to your local CrackAirport dataset_seg path)
+path: dataset_seg
+
+# Relative train/val/test splits
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+nc: 1
+names:
+  0: Crack
