@@ -1,0 +1,3 @@
+Dataset,Total Images,Positive,Negative,Instances,Train,Val,Test
+CrackAirport (Detection),2262,1209,1053,2798,1583,452,227
+CrackAirport (Segmentation),2278,1209,1053,2798,1599,452,227

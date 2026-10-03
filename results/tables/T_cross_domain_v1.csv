@@ -1,0 +1,3 @@
+Domain,Source,Images,Resolution,Classes,Task,Architecture,mAP50_box,mAP50_95_box,mAP50_mask,Attention,PCI
+Road Highway,RDD2022 (Sensors 2026),6972,640×640,4,Detection Only,YOLO26s,89.0,51.6,,Standard C2PSA,None
+Airport Runway,CrackAirport (This Thesis),2262,512×512,1,Detection + Segmentation,DC2PSA-YOLO26s-Seg,0.4507942020167508,0.26426822866748695,0.2982544930765183,DC2PSA (DSConv),"Length, Width, Area, ASTM"
