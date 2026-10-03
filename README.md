@@ -27,7 +27,7 @@
 ## 🏗️ DC2PSA-YOLO26-Seg Pipeline Architecture
 
 <p align="center">
-  <img src="figures/architecture/dc2psa_pipeline.png" alt="DC2PSA-YOLO26-Seg Architecture" width="100%">
+  <img src="figures/architecture/dc2psa_pipeline.jpg" alt="DC2PSA-YOLO26-Seg Architecture" width="100%">
 </p>
 
 <p align="center"><em>End-to-end architecture: C3k2 backbone → SPPF → <strong>DC2PSA attention (ours)</strong> → PAN-FPN neck → decoupled detection + segmentation heads.</em></p>
@@ -516,7 +516,7 @@ DC2PSA-YOLO26-Real-Time-Airport-Runway-Crack-Detection-and-Instance-Segmentation
 │
 ├── figures/                           # Publication-quality figures (600 DPI)
 │   ├── architecture/                  # Model architecture diagrams
-│   │   ├── dc2psa_pipeline.png        # End-to-end architecture
+│   │   ├── dc2psa_pipeline.jpg        # End-to-end architecture
 │   │   ├── dc2psa_module_internals.png # DSConv vs DCNv2 vs Conv comparison
 │   │   └── faa_pci_quantification.png # FAA PCI quantification flowchart
 │   ├── dataset/                       # Dataset distribution & visualization

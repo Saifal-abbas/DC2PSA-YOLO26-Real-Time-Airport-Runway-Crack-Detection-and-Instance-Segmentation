@@ -72,5 +72,6 @@ NewPaper/
 !requirements.txt
 !docs/**
 !figures/**/*.png
+!figures/**/*.jpg
 !notebooks/DC2PSA_YOLO26_Seg_Training.ipynb
 
