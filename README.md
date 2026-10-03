@@ -109,10 +109,10 @@ $$p_{i+c} = \left(x_i + c,\;\; y_i + \sum_{j=i}^{i+c} \Delta y_j\right), \quad c
 ## 📊 CrackAirport Dataset
 
 <p align="center">
-  <img src="figures/dataset/runway_overview.png" alt="Airport Runway Drone Imagery" width="85%">
+  <img src="figures/dataset/sample_images.png" alt="CrackAirport Sample Drone Imagery" width="95%">
 </p>
 
-<p align="center"><em>Nadir drone imagery of an active airfield runway (Tennessee, USA) captured at 100 ft AGL with a 61 MP Sony ILCE-7RM4A sensor.</em></p>
+<p align="center"><em>Representative high-resolution drone imagery from the <strong>CrackAirport</strong> benchmark with ground-truth instance segmentation overlays, illustrating diverse crack morphologies (longitudinal, transverse, and alligator networks) across concrete runway pavements with tire rubber contamination.</em></p>
 
 ### Dataset Statistics
 
@@ -129,13 +129,13 @@ $$p_{i+c} = \left(x_i + c,\;\; y_i + \sum_{j=i}^{i+c} \Delta y_j\right), \quad c
 | **Acquisition** | Sony ILCE-7RM4A on rotary UAV, 100 ft AGL, nadir |
 | **Pavement Types** | Rigid PCC slabs & flexible polymer asphalt overlays |
 
-### Dataset Visualization
+### Dataset Visualization & Mask Quality
 
 <p align="center">
-  <img src="figures/dataset/sample_images.png" alt="Sample Drone Crack Images" width="95%">
+  <img src="figures/dataset/mask_overlays.png" alt="High-Resolution Mask Overlays" width="95%">
 </p>
 
-<p align="center"><em>4×3 grid of drone-captured runway crack images with ground-truth segmentation masks overlaid.</em></p>
+<p align="center"><em>High-magnification ground-truth mask overlays demonstrating sub-pixel contour tracing accuracy on thin curvilinear runway cracks.</em></p>
 
 <details>
 <summary><strong>📈 Click to expand: Instance Geometry & Annotation Analysis</strong></summary>
